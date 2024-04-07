@@ -1,0 +1,58 @@
+.products-list{
+    margin-top: 30px;
+}
+.products {
+    margin-top: 30px;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.products .products-table {
+   
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 5px;
+}
+.products .products-table tr{
+    border-top: 1px solid black;
+}
+.products .products-table thead tr{
+    border-top: none;
+}
+.products .products-table thead tr th{
+    font-weight: 700;
+}
+.products .products-table th,.products .products-table td{
+    padding: 15px;
+}
+.products-list .search-products{
+    width: 50%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+}
+.products-list .search-products input{
+    background-color: transparent;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    border: 1px solid #B4B4B8;
+    width: 45%;
+}
+.products-list .search-products input:focus-visible{
+    border-color: black;
+}
+.products-list .search-products button{
+    background-color: #B4B4B8;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    transition: .5s;
+   
+}
+.products-list .search-products button:hover{
+    transform: translateY(-5px);
+}
