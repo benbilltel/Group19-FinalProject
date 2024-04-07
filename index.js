@@ -37,13 +37,14 @@ app.get("/products", (req, res) => {
             }
         }
         if (String(searchText) !== "null") {
-            $and.push({ $or: [{ _id: { $regex: searchText, $options: 'i' } }, { productName: { $regex: searchText, $options: 'i' } }] })
+            $and.push({ $or: [{ productCode: { $regex: searchText, $options: 'i' } }, { productName: { $regex: searchText, $options: 'i' } }] })
         }
         if ($and.length > 0) {
             query = {
                 $and
             }
         }
+        
         searchProductsDTO(query).then(productsDTO => {
             const data = JSON.stringify(productsDTO);
             res.json({ message: "Search successfull", ProductsDTO: data })

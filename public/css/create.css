@@ -1,0 +1,19 @@
+.create{
+    margin-top: 30px;
+}
+.create input,.create select{
+    background-color: transparent;
+    border: 1px solid #C7C8CC;
+    cursor: pointer;
+}
+
+.create input:focus-visible{
+    border-color: black;
+    outline: none;
+}
+.create input:focus{
+    border-color: black;
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+}

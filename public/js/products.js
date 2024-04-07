@@ -1,7 +1,7 @@
-const { getProducts , searchProducts} = require("./db");
+const { getProducts, searchProducts } = require("./db");
 const convertProductsToDTO = (products) => {
     return products.map(p => ({
-        id: p._id,
+        productCode: p.productCode,
         productName: p.productName,
         category: p.category,
         quantity: p.quantity,
@@ -9,6 +9,18 @@ const convertProductsToDTO = (products) => {
         image: p.image
     }));
 }
+const generateID = (category) => {
+    const list = products.filter((item) => item.category === category);
+    let maxId = 0;
+    list.forEach((item) => {
+        const itemId = parseInt(item.id.substring(category.length));
+        if (itemId > maxId) {
+            maxId = itemId;
+        }
+    });
+    const newId = category + (maxId + 1).toString().padStart(4, "0");
+    return newId;
+};
 const getProductsDTO = async () => {
     try {
         return getProducts()
@@ -44,4 +56,4 @@ const searchProductsDTO = async (query) => {
         throw e;
     }
 };
-module.exports = { getProductsDTO,searchProductsDTO };
+module.exports = { getProductsDTO, searchProductsDTO };
