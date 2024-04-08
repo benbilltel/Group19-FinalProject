@@ -1,0 +1,99 @@
+.update-product-section{
+    margin-top: 30px;
+    
+
+}
+.update-context{
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+    
+}
+.product-list{
+    width: 18%;
+}
+.product-list .product-list-top{
+    overflow: auto;
+    max-height: 400px;
+}
+.product-info {
+    width: 80%;
+    overflow: auto;
+    max-height: 500px;
+}
+.info-item-right img{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.info-item-right{
+    width: 40%;
+}
+.product-info-item{
+    border-bottom: 1px solid #B4B4B8 ;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    gap: 40px;
+}
+.info-item-left{
+    width: 55%;
+}
+.product-list-top {
+    padding: 15px;
+}
+.product-list-top table{
+    width: 100%;
+    padding: 10px;
+    border-collapse: collapse;
+    border-spacing: 10px;
+}
+.product-list-top table tr{
+    border-bottom: 1px solid #B4B4B8;
+}
+.product-list-top table tr th, .product-list-top table td{
+    padding: 20px;
+}
+.product-list-top table tr button{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #B4B4B8;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: .5s;
+}
+.product-list-top table tr button:hover,.product-list-top table tr button.active{
+    background-color: #739552;
+    color: white;
+}
+.info-item-right{
+    position: relative;
+}
+.info-item-right i{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: rgb(158, 16, 16);
+    font-size: 30px;
+    transition: .5s;
+}
+.info-item-right i:hover{
+    top: 5px;
+    cursor: pointer;
+}
+.product-info {
+    padding: 15px;
+}
+.product-info input,.product-info select {
+    background-color: transparent;
+    border: 1px solid #B4B4B8;
+    cursor: pointer;
+}
+.product-info input:focus{
+    background-color: transparent;
+    box-shadow: none;
+    border-color: black;
+}
