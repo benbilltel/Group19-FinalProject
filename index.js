@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const multer = require("multer")
 const PORT = 3000
 
-const { getProductsDTO, searchProductsDTO } = require("./public/js/products")
+const { getProductsDTO, searchProductsDTO, insertProductDTO,insertProductsDTO } = require("./public/js/products")
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "public/images");
@@ -44,7 +44,7 @@ app.get("/products", (req, res) => {
                 $and
             }
         }
-        
+
         searchProductsDTO(query).then(productsDTO => {
             const data = JSON.stringify(productsDTO);
             res.json({ message: "Search successfull", ProductsDTO: data })
@@ -82,6 +82,40 @@ app.get("/products/delete", (req, res) => {
     res.sendFile(path.resolve(__dirname, "public/pages/delete.html"))
 })
 
+
+app.post("/products/createOne", upload.single("image"), (req, res) => {
+    const { productName, category, quantity, price } = req.body;
+    const pathImage = req.file.path.replace("public\\", "");
+    let product = {
+        productName,
+        category,
+        quantity,
+        price,
+        image: pathImage
+    }
+    
+    insertProductDTO(product).then(productDTO => {
+        const data = JSON.stringify(productDTO);
+        res.json({ message: "Insert product successfull", ProductDTO: data })
+    }).catch(e => {
+        res.json({ message: e.message })
+        console.log(e)
+    })
+})
+app.post("/products/createMany/", (req, res) => {
+    const products = req.body;
+    
+  
+    insertProductsDTO(products).then(productsDTO => {
+        const data = JSON.stringify(productsDTO);
+        res.json({ message: "Insert products successfull", ProductsDTO: data })
+    }).catch(e => {
+        res.json({ message: e.message })
+        console.log(e)
+    })
+  
+    
+  });
 
 app.listen(PORT, () => {
     console.log(`App is listening at port http://127.0.0.1:3000`)

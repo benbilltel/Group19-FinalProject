@@ -39,36 +39,48 @@
             </li>
         </ul>
     </header>
-    <div class="cs-container-90 create">
-        <div class="insert-product">
-            <form id="new_product" action="/craete/product" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="productName" class="form-label">Product Name</label>
-                    <input type="text" class="form-control" id="productName" name="productName" required>
-                </div>
-                <div class="mb-3">
-                    <label for="category" class="form-label">Category</label>
-                    <select class="form-select" id="category" name="category">
-                        <option value="Table">Table</option>
-                        <option value="Chair">Chair</option>
-                        <option value="Decoration">Decoration</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="quantity" class="form-label">Quantity</label>
-                    <input type="number" class="form-control" id="quantity" name="quantity" required>
-                </div>
-                <div class="mb-3">
-                    <label for="price" class="form-label">Price</label>
-                    <input type="number" class="form-control" id="price" name="price" required>
-                </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Image</label>
-                    <input type="file" class="form-control" name="image" id="image">
-                </div>
-                <button type="submit" class="btn btn-primary">Upload</button>
-            </form>
+    <div class="cs-container-90 create creater">
+        <div class="creater-left">
+            <button type="button" class="active btn-insert-one">Insert one</button>
+            <button type="button" class="btn-insert-many">Insert many</button>
         </div>
+        <div class="creater-right">
+            <div class="insert-product">
+                <form id="new_product" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="productName" name="productName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" id="category" name="category">
+                            <option value="Table">Table</option>
+                            <option value="Chair">Chair</option>
+                            <option value="Decoration">Decoration</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="price" name="price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control" accept=".jpg" name="image" id="image" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            </div>
+            <div class="insert-products">
+                <label for="jsonFileInput" class="form-label">File json</label>
+                <input type="file" id="jsonFileInput" accept=".json" class="form-control my-3" required>
+                <button onclick="uploadProducts()" class="btn btn-primary">Upload</button>
+            </div>
+        </div>
+
     </div>
 
 
@@ -77,6 +89,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="\js/createHandleApis.js"></script>
 </body>
 
 </html>

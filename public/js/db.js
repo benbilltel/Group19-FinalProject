@@ -32,5 +32,33 @@ const searchProducts = async (query)=>{
         client.close();
     }
 }
+const insertProduct = async (product)=>{
+    const client = new MongoClient(connectionString)
+    try{
+        await client.connect()
+        const db = client.db(dbName)
+        const collection = db.collection(collectionName)
+        const productInserted = await collection.insertOne(product);
+        return productInserted
+    }catch(e){
+        console.log("Insert product from db error: ",e)
+    }finally{
+        client.close();
+    }
+}
+const insertProducts = async (products)=>{
+    const client = new MongoClient(connectionString)
+    try{
+        await client.connect()
+        const db = client.db(dbName)
+        const collection = db.collection(collectionName)
+        const productsInserted = await collection.insertMany(products);
+        return productsInserted
+    }catch(e){
+        console.log("Insert products from db error: ",e)
+    }finally{
+        client.close();
+    }
+}
 
-module.exports = {getProducts,searchProducts}
+module.exports = {getProducts,searchProducts,insertProduct,insertProducts}

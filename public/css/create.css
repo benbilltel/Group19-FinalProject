@@ -17,3 +17,40 @@
     outline: none;
     box-shadow: none;
 }
+.creater{
+    display: flex;
+    justify-content: start;
+    align-items: top;
+    gap:10px;
+}
+.creater-left{
+    width: 10%;
+    border-right: 1px solid #B4B4B8;
+}
+.creater-left button{
+    display: block;
+    width: 120px;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    margin-bottom: 5px;
+    text-align: start;
+    font-weight: 700;
+    border-bottom: 1px solid #B4B4B8 ;
+    color: #B4B4B8;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    transition: .5s;
+}
+.creater-left button.active,.creater-left button:hover{
+    color: black;
+}
+.creater-left button:hover{
+    transform: translateY(-5px);
+}
+.creater-right{
+    width: 75%;
+}
+.insert-products{
+    display: none;
+}
+
