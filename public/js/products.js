@@ -39,15 +39,46 @@ const generateCode = async (category) => {
         return newCode;
     } catch (error) {
         console.log("Error generating code:", error);
-        throw error;
     }
 };
+const generateCodes = async (products) => {
+    try {
+        let productList = await getProducts()
+        let productsCoded = []
+        let index = 0;
+        products.forEach(p => {
+            const list = productList.filter((item) => item.category === p.category);
+            index++
+            let maxId = 0;
+            if (list.length > 0) {
+                list.forEach((item) => {
+                    if (item["productCode"]) {
+                        const productCode = item["productCode"].toString()
+                        let itemId = parseInt(productCode.substring(item["category"].length + 1));
+
+                        if (itemId > maxId) {
+                            maxId = itemId;
+                        }
+                    }
+                });
+            }
+            p["productCode"] = p.category + "-" + (maxId + 1).toString().padStart(4, "0");
+
+            productList.push(p)
+            productsCoded.push(p)
+        })
+        return productsCoded
+    } catch (e) {
+
+        console.log("Error generating codes:", error);
+    }
+}
 const getProductsDTO = async () => {
     try {
         return getProducts()
             .then(products => {
                 const productsDTO = convertProductsToDTO(products)
-               
+
                 return productsDTO;
             })
 
@@ -83,18 +114,14 @@ const insertProductDTO = async (product) => {
     }
 };
 const insertProductsDTO = async (products) => {
+
     try {
-      products = await Promise.all(products.map(async (product) => {
-        const newCode = await generateCode(product["category"]);
-        product["productCode"] = newCode;
-        return product;
-      }));
-  
-      const productInserted = await insertProducts(products);
-      const productsDTO = convertProductsToDTO(productInserted);
-      return productsDTO;
+        products = await generateCodes(products);
+        const productInserted = await insertProducts(products);
+        const productsDTO = convertProductsToDTO(productInserted);
+        return productsDTO;
     } catch (e) {
-      console.log("Insert productsDTO error: ", e);
+        console.log("Insert productsDTO error: ", e);
     }
-  };
-module.exports = { getProductsDTO, searchProductsDTO, insertProductDTO ,insertProductsDTO};
+};
+module.exports = { getProductsDTO, searchProductsDTO, insertProductDTO, insertProductsDTO };

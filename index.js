@@ -104,7 +104,6 @@ app.post("/products/createOne", upload.single("image"), (req, res) => {
 })
 app.post("/products/createMany/", (req, res) => {
     const products = req.body;
-    
   
     insertProductsDTO(products).then(productsDTO => {
         const data = JSON.stringify(productsDTO);
