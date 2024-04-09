@@ -1,8 +1,8 @@
 let products = []
 fetch(window.location.href)
     .then(response => {
-        const productsDTO = response.headers.get("ProductsDTO");
-        return productsDTO ? JSON.parse(productsDTO) : [];
+        const products = response.headers.get("Products");
+        return products ? JSON.parse(products) : [];
     })
     .then(data => {
         products = data
@@ -43,7 +43,7 @@ const searchProducts = () => {
     
     if(data.message == "Search successfull"){
         
-        products = JSON.parse(data.ProductsDTO)
+        products = JSON.parse(data.Products)
         renderProducts()
     }
   })

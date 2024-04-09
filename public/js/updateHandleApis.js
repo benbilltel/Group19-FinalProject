@@ -1,8 +1,8 @@
 let products = []
 fetch("/products")
     .then(response => {
-        const productsDTO = response.headers.get("ProductsDTO");
-        return productsDTO ? JSON.parse(productsDTO) : [];
+        const products = response.headers.get("Products");
+        return products ? JSON.parse(products) : [];
     })
     .then(data => {
         products = data
@@ -57,7 +57,7 @@ const addToUpdate = (code) => {
                         <input type="number" class="form-control" id="price" value="${Number(detail["price"])}" name="price" required>
                     </div>
                     <div class="mb-3 input-file"></div>
-                    <button type="button" class="btn btn-primary">Upload</button>
+                    <button type="button" class="btn btn-primary" onclick="updateOne('${detail["productCode"]}')">Upload</button>
                 </div>
                 <div class="info-item-right">
                     <img src="\\${detail["image"]}" alt="Image">
@@ -82,6 +82,118 @@ const closeImg = (code) => {
         }
     })
 }
-let s = `
+const updateOne = (code) => {
+    const details = document.querySelectorAll(".product-info-item");
+    details.forEach((d) => {
+        if (d.dataset.code == code) {
+            let productName = d.querySelector("#productName").value;
+            let quantity = d.querySelector("#quantity").value;
+            let price = d.querySelector("#price").value;
+            let image = d.querySelector("#image")?.files[0] || false;
+            let product = {
+                productName,
+                quantity,
+                price,
+            };
 
-</div>`
+            const formData = new FormData();
+            formData.append("image", image);
+            formData.append("product", JSON.stringify(product));
+
+            fetch(`/products/updateOne/${code}`, {
+                method: "PUT",
+                body: formData,
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    alert(data.message);
+                    if (data.message == "Update product successful") {
+                        console.log(data);
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+    });
+};
+
+const updateSelected = async () => {
+    const details = document.querySelectorAll(".product-info-item");
+
+    if (details.length === 0) {
+        return;
+    }
+
+    for (const d of details) {
+        let productName = d.querySelector("#productName").value;
+        let quantity = d.querySelector("#quantity").value;
+        let price = d.querySelector("#price").value;
+        let image = d.querySelector("#image")?.files[0] || false;
+        let product = {
+            productCode: d.dataset.code,
+            productName,
+            quantity,
+            price,
+        };
+        const formdata = new FormData();
+        formdata.append(`image`, image);
+        formdata.append(`product`, JSON.stringify(product));
+
+        try {
+            const response = await fetch(`/products/loadDataToUpdate/${1}`, {
+                method: "PUT",
+                body: formdata,
+            });
+            const data = await response.json();
+            if (!data.message === "Load successful") {
+                console.log(data.message)
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    try {
+        const response = await fetch("/products/updateSelected", {
+            method: "PUT",
+        });
+        const data = await response.json();
+        if (data.message === "Update products successful") {
+            alert(data.message)
+        }
+        const response2 =await fetch(`/products/loadDataToUpdate/${2}`, {
+            method: "PUT",
+        });
+        const data2 = await response2.json();
+        if (data2.message === "Clear successful") {
+            
+        }
+        
+    } catch (error) {
+        console.error(error);
+    }
+};
+const resetPrice = ()=>{
+    const details = document.querySelectorAll(".product-info-item");
+    if (details.length === 0) {
+        return;
+    }
+    let codes = []
+    for (const d of details) {
+            codes.push(d.dataset.code)
+    }
+    if(codes.length>0){
+        fetch("/products/resetPrice",{
+            method:"PUT",
+            body: JSON.stringify(codes),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json()).then(data=>{
+            if(data.message == "Reset price products successful"){
+                alert(data.message)
+            }
+        })
+    }
+}
