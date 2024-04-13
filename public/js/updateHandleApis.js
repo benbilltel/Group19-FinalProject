@@ -1,5 +1,5 @@
 let products = []
-fetch("/products")
+fetch("/products/update/listID")
     .then(response => {
         const products = response.headers.get("Products");
         return products ? JSON.parse(products) : [];
@@ -108,7 +108,7 @@ const updateOne = (code) => {
                 .then((data) => {
                     alert(data.message);
                     if (data.message == "Update product successful") {
-                        console.log(data);
+                        window.location.href = "/products/update"
                     }
                 })
                 .catch((error) => {
@@ -167,7 +167,7 @@ const updateSelected = async () => {
         });
         const data2 = await response2.json();
         if (data2.message === "Clear successful") {
-            
+            window.location.href = "/products/update"
         }
         
     } catch (error) {
@@ -193,6 +193,7 @@ const resetPrice = ()=>{
         }).then(res=>res.json()).then(data=>{
             if(data.message == "Reset price products successful"){
                 alert(data.message)
+                window.location.href = "/products/update"
             }
         })
     }

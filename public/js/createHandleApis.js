@@ -15,7 +15,10 @@ function uploadProducts() {
         body: content
       })
       .then(response => response.json()).then(data=>{
-        alert(data.message)
+        if (data.message == "Insert products successfull") {
+          alert(data.message)
+          window.location.href = "/products"
+        }
       })
       .catch(error => {
         console.log('Error:', error);
@@ -48,7 +51,8 @@ document.getElementById("new_product").addEventListener("submit", (e) => {
     .then((data) => {
       alert(data.message);
       if (data.message == "Insert product successfull") {
-        console.log(data)
+        alert(data.message)
+        window.location.href = "/products"
       }
     })
     .catch((error) => {

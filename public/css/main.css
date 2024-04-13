@@ -27,11 +27,13 @@ body {
 }
 
 .header .nav-link {
-    color: #B4B4B8;
+    color: black;
     text-transform: uppercase;
     font-weight: 700;
 }
-
+.header .nav-link.active,.header .nav-link:hover {
+    color: #739552;
+}
 .header .nav-link img {
     width: 50px;
     height: 50px;

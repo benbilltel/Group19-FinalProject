@@ -22,7 +22,6 @@ const storage = multer.diskStorage({
     },
 });
 const upload = multer({ storage: storage });
-
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -31,66 +30,106 @@ app.get("/", (req, res) => {
     res.sendFile(path.resolve(__dirname, "public/pages/home.html"))
 })
 app.get("/products", (req, res) => {
-    const { searchText, min, max, isSearch } = req.query;
-    if (Number(isSearch) === 1) {
-        let query = {
-        };
-        let $and = []
-        if (Number(max) >= 0) {
-            if (Number(max) > Number(min)) {
-                $and.push({ price: { $gte: Number(min), $lte: Number(max) } })
-            } else if (Number(max) == Number(min) && Number(max) != 0) {
-                $and.push({ price: Number(min) })
-            }
-        }
-        if (String(searchText) !== "null") {
-            $and.push({ $or: [{ productCode: { $regex: searchText, $options: 'i' } }, { productName: { $regex: searchText, $options: 'i' } }] })
-        }
-        if ($and.length > 0) {
-            query = {
-                $and
-            }
-        }
-        const client = new MongoClient(connectionString)
-        try {
-            client.connect().then(client => {
-                const db = client.db(dbName)
-                const collection = db.collection(collectionName)
-                collection.find(query).toArray().then(products => {
-                    const data = JSON.stringify(products);
-                    res.json({ message: "Search successfull", Products: data })
-                    client.close();
+    const client = new MongoClient(connectionString)
+    let { page, items } = req.query
+    page = Number(page)
+    items = Number(items)
+    let startItem = (page - 1) * items
+    let endItem = page * items
+    try {
+        client.connect().then(client => {
+            const db = client.db(dbName)
+            const collection = db.collection(collectionName)
+            collection.find().toArray().then(products => {
+                const totalPages = Math.ceil(products.length / items)
+                products = products.slice(startItem, endItem)
+                const data = JSON.stringify(products);
+                res.sendFile(path.resolve(__dirname, "public/pages/products.html"), {
+                    headers: {
+                        "Content-Type": "text/html",
+                        "Products": data,
+                        "TotalPages": totalPages.toString(),
+                    }
                 });
+                client.close();
             })
-        } catch (e) {
-            res.json({ message: e.message })
-            console.log(e)
+        })
+    } catch (e) {
+        res.sendFile(path.resolve(__dirname, "public/pages/products.html"), {
+            headers: {
+                "Content-Type": "text/html",
+            }
+        });
+        console.log(e)
+    }
+})
+app.get("/products/search", (req, res) => {
+    const { searchText, min, max } = req.query;
+    let { page, items } = req.query
+    page = Number(page)
+    items = Number(items)
+    let startItem = (page - 1) * items
+    let endItem = page * items
+    let query = {
+    };
+    let $and = []
+    if (Number(max) >= 0) {
+        if (Number(max) > Number(min)) {
+            $and.push({ price: { $gte: Number(min), $lte: Number(max) } })
+        } else if (Number(max) == Number(min) && Number(max) != 0) {
+            $and.push({ price: Number(min) })
         }
-    } else {
-        const client = new MongoClient(connectionString)
-        try {
-            client.connect().then(client => {
-                const db = client.db(dbName)
-                const collection = db.collection(collectionName)
-                collection.find().toArray().then(products => {
-                    const data = JSON.stringify(products);
-                    res.sendFile(path.resolve(__dirname, "public/pages/products.html"), {
-                        headers: {
-                            "Content-Type": "text/html",
-                            "Products": data
-                        }
-                    });
-                    client.close();
-                })
-            })
-        } catch (e) {
-            res.sendFile(path.resolve(__dirname, "public/pages/products.html"), {
-                headers: {
-                    "Content-Type": "text/html",
-                }
+    }
+    if (String(searchText) !== "null") {
+        $and.push({ $or: [{ productCode: { $regex: searchText, $options: 'i' } }, { productName: { $regex: searchText, $options: 'i' } }] })
+    }
+    if ($and.length > 0) {
+        query = {
+            $and
+        }
+    }
+    const client = new MongoClient(connectionString)
+    try {
+        client.connect().then(client => {
+            const db = client.db(dbName)
+            const collection = db.collection(collectionName)
+            collection.find(query).toArray().then(products => {
+                const totalPages = Math.ceil(products.length / items)
+                products = products.slice(startItem, endItem)
+                const data = JSON.stringify(products);
+                res.json({ message: "Search successfull", Products: data, TotalPages: totalPages })
+                client.close();
             });
-            console.log(e)
-        }
+        })
+    } catch (e) {
+        res.json({ message: e.message })
+        console.log(e)
+    }
+})
+app.get("/products/update/listID", (req, res) => {
+    const client = new MongoClient(connectionString)
+    try {
+        client.connect().then(client => {
+            const db = client.db(dbName)
+            const collection = db.collection(collectionName)
+            collection.find().toArray().then(products => {
+                const data = JSON.stringify(products);
+                res.sendFile(path.resolve(__dirname, "public/pages/products.html"), {
+                    headers: {
+                        "Content-Type": "text/html",
+                        "Products": data
+                    }
+                });
+                client.close();
+            })
+        })
+    } catch (e) {
+        res.sendFile(path.resolve(__dirname, "public/pages/products.html"), {
+            headers: {
+                "Content-Type": "text/html",
+            }
+        });
+        console.log(e)
     }
 })
 app.get("/products/create", (req, res) => {
@@ -281,7 +320,7 @@ app.put("/products/resetPrice", (req, res) => {
             const collection = db.collection(collectionName);
             collection.updateMany(
                 { productCode: { $in: req.body.map((code) => code) } },
-                { $set: { price : 0 } }
+                { $set: { price: 0 } }
             )
                 .then((productsUpdated) => {
                     const data = JSON.stringify(productsUpdated);

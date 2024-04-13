@@ -26,7 +26,7 @@
     padding: 15px;
 }
 .products-list .search-products{
-    width: 50%;
+    width: 60%;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -55,4 +55,20 @@
 }
 .products-list .search-products button:hover{
     transform: translateY(-5px);
+}
+.pagination {
+    display: flex; 
+    justify-content: end;
+    padding: 20px;
+    gap: 10px;
+}
+.pagination button{
+    background-color: #C7C8CC ;
+    padding: 10px ;
+    border: none;
+    border-radius: 10px;
+}
+.pagination button.active{
+    background-color: #739552;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
