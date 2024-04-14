@@ -41,26 +41,28 @@
     </header>
     <div class="cs-container-90 update-product-section">
         <div class="update-context">
-        <div class="product-list">
-            <div class="product-list-top"><table class="table-product-codes">
-                <thead>
-                    <th>Product Code</th>
-                    <th></th>
-                </thead>
-                <tbody>
-                </tbody>
-            </table></div>
-            <div class="product-list-bot my-5 d-flex justify-content-between">
-                <button type="button" onclick="resetPrice()" class="btn btn-primary">Reset Price</button>
-                <button type="button" onclick="updateSelected()" class="btn btn-primary">Upload</button>
+            <div class="product-list">
+                <div class="product-list-top">
+                    <table class="table-product-codes">
+                        <thead>
+                            <th>Product Code</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="product-list-bot my-5 d-flex justify-content-end" style="gap: 20px;">
+                    <button type="button" onclick="resetPrice()" class="btn btn-success">Reset Price</button>
+                    <button type="button" onclick="updateSelected()" class="btn btn-success">Upload</button>
+                </div>
+            </div>
+            <div class="product-info">
+
+
+
             </div>
         </div>
-        <div class="product-info">
-            
-
-            
-        </div>
-    </div>
     </div>
 
 
@@ -69,6 +71,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="\js\animation.js"></script>
     <script src="\js/updateHandleApis.js"></script>
 </body>
 

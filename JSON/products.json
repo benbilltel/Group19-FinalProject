@@ -4,7 +4,7 @@
       "category": "Table",
       "quantity": 150,
       "price": 79,
-      "image": "images/table.jpg"
+      "image": "images/table-01.jpg"
     },
     {
 
@@ -12,7 +12,7 @@
       "category": "Chair",
       "quantity": 19,
       "price": 39,
-      "image": "images/chair.jpg"
+      "image": "images/chair-01.jpg"
     },
     {
 
@@ -20,7 +20,7 @@
       "category": "Table",
       "quantity": 46,
       "price": 90,
-      "image": "images/table.jpg"
+      "image": "images/table-02.jpg"
     },
     {
 
@@ -28,21 +28,21 @@
       "category": "Chair",
       "quantity": 98,
       "price": 46,
-      "image": "images/chair.jpg"
+      "image": "images/chair-02.jpg"
     },
     {
       "productName": "Wood desk",
       "category": "Table",
       "quantity": 177,
       "price": 77,
-      "image": "images/table.jpg"
+      "image": "images/table-03.jpg"
     },
     {
       "productName": "Rocking chair",
       "category": "Chair",
       "quantity": 89,
       "price": 99,
-      "image": "images/chair.jpg"
+      "image": "images/chair-03.jpg"
     },
     {
 
@@ -50,27 +50,27 @@
       "category": "Table",
       "quantity": 19,
       "price": 29,
-      "image": "images/table.jpg"
+      "image": "images/table-04.jpg"
     },
     {
       "productName": "Bench",
       "category": "Chair",
       "quantity": 53,
       "price": 55,
-      "image": "images/chair.jpg"
+      "image": "images/chair-04.jpg"
     },
     {
       "productName": "Studying desk",
       "category": "Table",
       "quantity": 63,
       "price": 33,
-      "image": "images/table.jpg"
+      "image": "images/table-05.jpg"
     },
     {
       "productName": "Swivel chair",
       "category": "Chair",
       "quantity": 63,
       "price": 32,
-      "image": "images/chair.jpg"
+      "image": "images/chair-05.jpg"
     }
   ]

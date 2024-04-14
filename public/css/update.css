@@ -14,12 +14,12 @@
 }
 .product-list .product-list-top{
     overflow: auto;
-    max-height: 400px;
+    height: 400px;
 }
 .product-info {
     width: 80%;
     overflow: auto;
-    max-height: 500px;
+    height: 500px;
 }
 .info-item-right img{
     width: 100%;

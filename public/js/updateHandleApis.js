@@ -23,7 +23,6 @@ const renderProductList = () => {
     table.querySelector("tbody").innerHTML = htmlTbody
 }
 const addToUpdate = (code) => {
-
     const table = document.querySelector(".table-product-codes");
     const trs = table.querySelectorAll("tbody tr")
     trs.forEach(tr => {
@@ -57,7 +56,7 @@ const addToUpdate = (code) => {
                         <input type="number" class="form-control" id="price" value="${Number(detail["price"])}" name="price" required>
                     </div>
                     <div class="mb-3 input-file"></div>
-                    <button type="button" class="btn btn-primary" onclick="updateOne('${detail["productCode"]}')">Upload</button>
+                    <button type="button" class="btn btn-success" onclick="updateOne('${detail["productCode"]}')">Upload</button>
                 </div>
                 <div class="info-item-right">
                     <img src="\\${detail["image"]}" alt="Image">
@@ -106,9 +105,13 @@ const updateOne = (code) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    alert(data.message);
+                    
                     if (data.message == "Update product successful") {
-                        window.location.href = "/products/update"
+                        showToast(data.message,"success",()=>{
+                            window.location.href = "/products/update"
+                        })
+                    }else{
+                        showToast(data.message)
                     }
                 })
                 .catch((error) => {
@@ -160,14 +163,17 @@ const updateSelected = async () => {
         });
         const data = await response.json();
         if (data.message === "Update products successful") {
-            alert(data.message)
+        }else{
+            showToast(data.message)
         }
-        const response2 =await fetch(`/products/loadDataToUpdate/${2}`, {
+        const response2 = await fetch(`/products/loadDataToUpdate/${2}`, {
             method: "PUT",
         });
         const data2 = await response2.json();
         if (data2.message === "Clear successful") {
-            window.location.href = "/products/update"
+            showToast(data.message,"success",()=>{
+                window.location.href = "/products/update"
+            })
         }
         
     } catch (error) {
@@ -192,8 +198,12 @@ const resetPrice = ()=>{
             }
         }).then(res=>res.json()).then(data=>{
             if(data.message == "Reset price products successful"){
-                alert(data.message)
-                window.location.href = "/products/update"
+                showToast(data.message,"success",()=>{
+                    window.location.href = "/products/update"
+                })
+                
+            }else{
+                showToast(data.message)
             }
         })
     }

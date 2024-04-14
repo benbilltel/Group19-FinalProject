@@ -1,0 +1,11 @@
+.product-list {
+    width: 30%;
+}
+
+table tr td i {
+    font-size: 12px;
+}
+
+.product-list-top table tr button:hover {
+    background-color: #DC3545;
+}

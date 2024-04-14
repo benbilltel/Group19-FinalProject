@@ -54,4 +54,32 @@ body {
     }
 }
 
-
+.toasts {
+    position: fixed;
+    left: 5vw;
+    bottom: 5vh;
+    z-index: 10;
+    width: auto;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    display: none;
+  }
+  
+  .toasts-success {
+    background-color: #1a6634;
+    color: #fff;
+  }
+  
+  .toasts-fail {
+    background-color: #FD7676;
+    color: #fff;
+  }
+  
+  .toasts p {
+    margin: 0;
+  }
+  
+  .show {
+    display: block;
+  }

@@ -1,33 +1,39 @@
-.create{
+.create {
     margin-top: 30px;
 }
-.create input,.create select{
+
+.create input,
+.create select {
     background-color: transparent;
     border: 1px solid #C7C8CC;
     cursor: pointer;
 }
 
-.create input:focus-visible{
+.create input:focus-visible {
     border-color: black;
     outline: none;
 }
-.create input:focus{
+
+.create input:focus {
     border-color: black;
     background-color: transparent;
     outline: none;
     box-shadow: none;
 }
-.creater{
+
+.creater {
     display: flex;
     justify-content: start;
     align-items: top;
-    gap:10px;
+    gap: 10px;
 }
-.creater-left{
+
+.creater-left {
     width: 10%;
     border-right: 1px solid #B4B4B8;
 }
-.creater-left button{
+
+.creater-left button {
     display: block;
     width: 120px;
     padding: 10px;
@@ -36,21 +42,76 @@
     margin-bottom: 5px;
     text-align: start;
     font-weight: 700;
-    border-bottom: 1px solid #B4B4B8 ;
+    border-bottom: 1px solid #B4B4B8;
     color: #B4B4B8;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     transition: .5s;
 }
-.creater-left button.active,.creater-left button:hover{
+
+.creater-left button.active,
+.creater-left button:hover {
     color: black;
 }
-.creater-left button:hover{
+
+.creater-left button:hover {
     transform: translateY(-5px);
 }
-.creater-right{
-    width: 75%;
+
+.creater-right {
+    width: 85%;
 }
-.insert-products{
+
+.insert-products {
     display: none;
 }
 
+.insert-product .insert-typed {
+    height: 470px;
+    overflow: auto;
+    width: 50%;
+}
+
+.insert-product .insert-form {
+    width: 50%;
+}
+
+.insert-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    align-items: center;
+}
+
+.insert-typed-item {
+    padding: 30px;
+    border-bottom: 1px solid black;
+}
+
+.insert-typed-item .btn-remove {
+    border-radius: 50%;
+    padding: 15px;
+    background-color: orangered;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .5s;
+    border: 1px solid orangered;
+}
+
+.insert-typed-item .btn-remove i {
+    color: white;
+    font-size: 10px;
+    transition: .5s;
+}
+
+.insert-typed-item .btn-remove:hover {
+    background-color: transparent;
+    border-color:black ;
+}
+
+.insert-typed-item .btn-remove:hover i {
+    color: black;
+}

@@ -1,5 +1,5 @@
 let products = []
-let items = 10
+let items = 5
 fetch(window.location.href + `/?page=${1}&items=${items}`)
   .then(response => {
     const products = response.headers.get("Products");
@@ -45,12 +45,11 @@ const searchProducts = () => {
         totalPages = Number(data.TotalPages)
         products = JSON.parse(data.Products)
         if (products.length <= 0) {
-          alert("Product not found")
+          showToast("Product not found")
         } else {
           renderPagination(totalPages, 1, 1)
           renderProducts()
         }
-
       }
     })
     .catch(e => {
@@ -108,7 +107,7 @@ const renderProductByPage = (page, isSearch) => {
           totalPages = Number(data.TotalPages)
           products = JSON.parse(data.Products)
           if (products.length <= 0) {
-            alert("Product not found")
+            showToast("Product not found")
           } else {
             renderPagination(totalPages, page, 1)
             renderProducts()
