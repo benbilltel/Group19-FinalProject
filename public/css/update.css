@@ -10,7 +10,35 @@
     
 }
 .product-list{
-    width: 18%;
+    width: 30%;
+}
+.product-list .search-products{
+    width: 60%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+.product-list .search-products input{
+    background-color: transparent;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    border: 1px solid #B4B4B8;
+}
+.product-list .search-products button{
+    background-color: #B4B4B8;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    transition: .5s;
+   
+}
+.product-list .search-products button:hover{
+    transform: translateY(-5px);
 }
 .product-list .product-list-top{
     overflow: auto;

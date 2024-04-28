@@ -63,11 +63,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="quantity" class="form-label">Quantity</label>
-                                <input type="number" class="form-control" id="quantity" name="quantity" required>
+                                <input type="number" min="1" class="form-control" id="quantity" name="quantity" required>
                             </div>
                             <div class="mb-3">
                                 <label for="price" class="form-label">Price</label>
-                                <input type="number" class="form-control" id="price" name="price" required>
+                                <input type="number" min="0" class="form-control" id="price" name="price" required>
                             </div>
                             <div class="mb-3">
                                 <label for="image" class="form-label">Image</label>
@@ -88,7 +88,7 @@
             <div class="insert-products">
                 <label for="jsonFileInput" class="form-label">File json</label>
                 <input type="file" id="jsonFileInput" accept=".json" class="form-control my-3" required>
-                <button onclick="uploadProducts()" class="btn btn-primary">Upload</button>
+                <button onclick="uploadProducts()" class="btn btn-success">Upload</button>
             </div>
         </div>
 

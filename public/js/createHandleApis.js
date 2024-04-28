@@ -1,7 +1,6 @@
 function uploadProducts() {
   const fileInput = document.getElementById('jsonFileInput');
   const file = fileInput.files[0];
-
   if (file) {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -29,6 +28,8 @@ function uploadProducts() {
     };
 
     reader.readAsText(file);
+  }else{
+    showToast('File is null')
   }
 }
 let codeTemp = 0
@@ -39,8 +40,18 @@ const addProduct = () => {
   var quantity = form.querySelector("#quantity").value;
   var price = form.querySelector("#price").value;
   var image = form.querySelector("#image").files[0];
-  
-
+  if(quantity<=0){
+    showToast('Quantity is invalid!')
+    return;
+  }
+  if(price<0){
+    showToast('Price is invalid!')
+    return;
+  }
+  if(!image){
+    showToast('Image is not empty!')
+    return;
+  }
   if (productName && category && quantity && price && image) {
     codeTemp++;
     var formData = new FormData();
@@ -127,7 +138,19 @@ document.getElementById("new_product").addEventListener("submit", (e) => {
   var quantity = document.getElementById("quantity").value;
   var price = document.getElementById("price").value;
   var image = document.getElementById("image").files[0];
-
+  if(quantity<=0){
+    showToast('Quantity is invalid!')
+    return;
+  }
+  if(price<0){
+    showToast('Price is invalid!')
+    return;
+  }
+  if(!image){
+    showToast('Image is not empty!')
+    return;
+  }
+  if(productName && category && quantity && price && image){
   var formData = new FormData();
   formData.append("productName", productName);
   formData.append("category", category);
@@ -152,6 +175,7 @@ document.getElementById("new_product").addEventListener("submit", (e) => {
     .catch((error) => {
       console.error(error);
     });
+  }
 })
 const btnInsetOne = document.querySelector(".btn-insert-one")
 const btnInsetMany = document.querySelector(".btn-insert-many")
